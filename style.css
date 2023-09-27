@@ -1,0 +1,120 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.root {
+  height: 100%;
+}
+
+.root > .top_bar {
+  height: 80%;
+  background-color: black;
+  display: flex;
+}
+
+.root > .top_bar .screen {
+  width: 70%;
+  padding-top: 10px;
+}
+
+.root > .top_bar .log {
+  width: 30%;
+  background-color: azure;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#screen_illustr {
+  width: 80%;
+  padding: 0px 10px;
+  background-color: #BEBEBE;
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+  border-radius:  80% 80% 0 0;
+  margin-bottom: 40px;
+}
+
+.root > .bottom_bar {
+  height: 20%;
+  background-color: black;
+}
+.wrapper{
+    color: white;
+}
+#buy_form{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.root .bottom_bar .wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.root .log table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.root .log > table th {
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid gray;
+}
+
+.root .log table td {
+  font-size: 11px;
+  font-weight: normal;
+  border: 1px solid gray;
+}
+
+
+
+.row_elem {
+  display: flex;
+  justify-content: center;
+}
+
+.row_elem .place_elem {
+  width: 30px;
+  height: 30px;
+  margin: 4px;
+  background: white;
+  border: 1px solid darkgrey;
+  position: relative;
+  border-radius: 10% 10%;
+}
+.row_elem .focus {
+  background-color: orange;
+}
+.place_elem:hover .hover-block {
+  display: block;
+}
+.row_elem .place_elem:hover {
+  background-color: orange;
+  border-radius: 10% 10% 0 0;
+}
+.hover-block {
+  display: none;
+  position: absolute;
+  top: 105%;
+  z-index: 1;
+  border-radius: 0 10% 10%;
+  border: 1px solid darkgrey;
+  left: 0;
+  background-color: orange;
+  padding: 10px 10px;
+  text-align: center;
+  min-width: 70px;
+}
+.title,
+.price {
+  margin: 0 auto;
+}

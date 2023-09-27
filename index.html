@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <script src="cinema.js"></script>
+  </head>
+
+  <body>
+    <header class="header"></header>
+    <div class="root">
+      <div class="top_bar">
+        <div class="screen">
+          <div id="screen_illustr">Screen</div>
+
+          <div id="screen_layout"></div>
+        </div>
+        <div class="log">
+          <table>
+            <thead>
+              <tr>
+                <th>Row</th>
+                <th>Seat</th>
+                <th>Name</th>
+                <!-- <th>Type</th>
+                <th>Sum</th> -->
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bottom_bar" style="height: 20%; display: block">
+        <div class="wrapper">
+          <div>Number of seats: <span id="number_of_seats"></span></div>
+          <div>Total sum: <span id="total_sum"></span></div>
+          <div>Return sum: <span id="return_sum"></span></div>
+        </div>
+        <div id="modal-form" style="display: none">
+          <form action="" id="buy_form">
+            <input type="text" id="name" placeholder="Type name" />
+            <input type="hidden" id="place" />
+            <input type="hidden" id="row" />
+            <button type="submit">Buy ticket</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('buy_form').addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const row = document.getElementById('row').value;
+        const place = document.getElementById('place').value;
+
+        buyTicket(row, place, name);
+        document.getElementById('name').value=""
+        document.getElementById('modal-form').style.display = 'none';
+      });
+    </script>
+  </body>
+</html>
