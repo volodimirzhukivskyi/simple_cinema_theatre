@@ -1,28 +1,9 @@
+import { prices, transactions } from './constants.js';
+
 window.addEventListener('DOMContentLoaded', () => {
   //! При запуску рендериться початковий масив.
   render();
 });
-//! Масив транзакцій
-const transactions = [
-  {
-    type: 'purchase',
-    sum: 100,
-    row: 0,
-    place: 1,
-    clientName: 'Ivan',
-  },
-  {
-    type: 'purchase',
-    sum: 100,
-    row: 0,
-    place: 2,
-    clientName: 'Anna',
-  },
-];
-//!
-
-const prices = [50, 100, 100, 400, 500];
-//! Масив цін
 
 function buyTicket(row, place, clientName) {
   // Покупка квитка.
@@ -140,24 +121,27 @@ function printPlaces(places) {
     row.forEach((place, placeIndex) => {
       const placeDiv = document.createElement('div');
       placeDiv.className = 'place_elem';
-      placeDiv.insertAdjacentHTML('beforeend', `
+      placeDiv.insertAdjacentHTML(
+        'beforeend',
+        `
       <div class="hover-block">
       <h3 class="title">ROW ${rowIndex + 1}</h3>
-      <h3 class="title">SEAT ${placeIndex+1}</h3>
+      <h3 class="title">SEAT ${placeIndex + 1}</h3>
       <p class="price">$${prices[rowIndex]}</p>
     </div>
-      `)
+      `
+      );
       placeDiv.onclick = () => {
         if (!place) {
           document.querySelector('.focus')?.classList.remove('focus');
-          document.getElementById('modal-form').style.display = 'block';
+          document.getElementById('buyBtn').style.display = 'block';
           placeDiv.classList.add('focus');
 
           document.getElementById('place').value = placeIndex;
           document.getElementById('row').value = rowIndex;
-        }else{
-            document.querySelector('.focus')?.classList.remove('focus');
-          document.getElementById('modal-form').style.display = 'none';
+        } else {
+          document.querySelector('.focus')?.classList.remove('focus');
+          document.getElementById('buyBtn').style.display = 'none';
         }
       };
 
@@ -170,7 +154,17 @@ function printPlaces(places) {
     screen_layout.append(rowDiv);
   });
 }
+function showForm() {
+  const buyBtn = document.getElementById('buyBtn');
+  const modalBuy = document.getElementById('modal-form');
 
+  if (buyBtn) {
+    buyBtn.onclick = function () {
+      modalBuy.style.display = 'block';
+      buyBtn.style.display = 'none';
+    };
+  }
+}
 function render() {
   const total = calcTotalSum();
   const numberOfBusyPlaces = getBusyPlaces(getPlaces());
@@ -195,7 +189,7 @@ function render() {
     const elem = document.createElement('tr');
 
     const row = document.createElement('td');
-    row.innerText = +transaction.row+1;
+    row.innerText = +transaction.row + 1;
     elem.append(row);
 
     const place = document.createElement('td');
@@ -213,3 +207,15 @@ function render() {
 function success() {
   alert('Success');
 }
+showForm()
+document.getElementById('buy_form').addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const row = document.getElementById('row').value;
+  const place = document.getElementById('place').value;
+
+  buyTicket(row, place, name);
+  document.getElementById('name').value = '';
+  document.getElementById('modal-form').style.display = 'none';
+});

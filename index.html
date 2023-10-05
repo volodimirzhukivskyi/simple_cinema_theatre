@@ -6,7 +6,8 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap"
       rel="stylesheet" />
-    <script src="cinema.js"></script>
+    <script src="./js/cinema.js" type="module"></script>
+    <script src="./js/constants.js" type="module"></script>
   </head>
 
   <body>
@@ -40,6 +41,7 @@
           <div>Total sum: <span id="total_sum"></span></div>
           <div>Return sum: <span id="return_sum"></span></div>
         </div>
+        <button style="display: none" id="buyBtn">Buy ticket</button>
         <div id="modal-form" style="display: none">
           <form action="" id="buy_form">
             <input type="text" id="name" placeholder="Type name" />
@@ -52,17 +54,8 @@
     </div>
 
     <script>
-      document.getElementById('buy_form').addEventListener('submit', (event) => {
-        event.preventDefault();
 
-        const name = document.getElementById('name').value;
-        const row = document.getElementById('row').value;
-        const place = document.getElementById('place').value;
-
-        buyTicket(row, place, name);
-        document.getElementById('name').value=""
-        document.getElementById('modal-form').style.display = 'none';
-      });
+    
     </script>
   </body>
 </html>
