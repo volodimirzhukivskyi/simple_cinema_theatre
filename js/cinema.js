@@ -1,11 +1,12 @@
 import { prices, transactions } from './constants.js';
-
+import { showForm, submitBuyForm } from './listeners.js';
+import { deleteTransaction } from './functions/deleteTransaction.js';
 window.addEventListener('DOMContentLoaded', () => {
   //! При запуску рендериться початковий масив.
   render();
 });
 
-function buyTicket(row, place, clientName) {
+export function buyTicket(row, place, clientName) {
   // Покупка квитка.
 
   transactions.push({
@@ -20,33 +21,43 @@ function buyTicket(row, place, clientName) {
 }
 
 function returnTicket(row, place) {
-  const foundTransactions = transactions.filter((transaction) => {
+  // const foundTransactions = transactions.filter((transaction) => {
+  //   if (transaction.row === row && transaction.place === place) {
+  //     return true;
+  //   }
+
+  //   return false;
+  // });
+  let findIndex;
+  const findTransaction = transactions.find((transaction, i) => {
     if (transaction.row === row && transaction.place === place) {
+      findIndex = i;
       return true;
     }
 
     return false;
   });
+  // const findTransaction = foundTransactions.pop();
 
-  const lastTransaction = foundTransactions.pop();
-
-  if (!lastTransaction) {
+  if (!findTransaction) {
     alert('Error ...');
     return;
   }
+  findTransaction.isDelete = true;
+  transactions.splice(findIndex, 1, findTransaction);
 
-  if (lastTransaction.type === 'refund') {
+  if (findTransaction.type === 'refund') {
     alert('Error ... refund');
     return;
   }
 
   transactions.push({
     type: 'refund',
-    sum: lastTransaction.sum * 0.5,
-    row: lastTransaction.row,
-    place: lastTransaction.place,
-    clientName: lastTransaction.clientName,
-    purchaseTransaction: lastTransaction,
+    sum: findTransaction.sum * 0.5,
+    row: findTransaction.row,
+    place: findTransaction.place,
+    clientName: findTransaction.clientName,
+    purchaseTransaction: findTransaction,
   });
 
   render();
@@ -134,37 +145,27 @@ function printPlaces(places) {
       placeDiv.onclick = () => {
         if (!place) {
           document.querySelector('.focus')?.classList.remove('focus');
-          document.getElementById('buyBtn').style.display = 'block';
+          document.getElementById('buyBtn').disabled = false;
           placeDiv.classList.add('focus');
 
           document.getElementById('place').value = placeIndex;
           document.getElementById('row').value = rowIndex;
         } else {
           document.querySelector('.focus')?.classList.remove('focus');
-          document.getElementById('buyBtn').style.display = 'none';
+          document.getElementById('buyBtn').disabled = true;
         }
       };
 
       if (place) {
-        placeDiv.style.backgroundColor = 'red';
+        placeDiv.style.backgroundColor = 'grey';
+        placeDiv.onclick = returnTicket;
       }
-
       rowDiv.append(placeDiv);
+      screen_layout.append(rowDiv);
     });
-    screen_layout.append(rowDiv);
   });
 }
-function showForm() {
-  const buyBtn = document.getElementById('buyBtn');
-  const modalBuy = document.getElementById('modal-form');
 
-  if (buyBtn) {
-    buyBtn.onclick = function () {
-      modalBuy.style.display = 'block';
-      buyBtn.style.display = 'none';
-    };
-  }
-}
 function render() {
   const total = calcTotalSum();
   const numberOfBusyPlaces = getBusyPlaces(getPlaces());
@@ -185,6 +186,8 @@ function render() {
 
   transactions.forEach((transaction) => {
     //! рендер правої таблиці.
+    if (transaction.type === 'refund'||transaction.isDelete) return;
+    //! пропуск всіх транзакцій з refund.
 
     const elem = document.createElement('tr');
 
@@ -200,6 +203,17 @@ function render() {
     clientName.innerText = transaction.clientName;
     elem.append(clientName);
 
+    const deleteBtn = document.createElement('td');
+    const btn = document.createElement('button');
+    btn.innerText = 'Refund';
+    btn.onclick = function () {
+      returnTicket(transaction.row, transaction.place);
+      console.log(this.closest('tr'));
+      this.closest('tr').remove();
+      render();
+    };
+    deleteBtn.append(btn);
+    elem.append(deleteBtn);
     tbodyElem.append(elem);
   });
 }
@@ -207,15 +221,5 @@ function render() {
 function success() {
   alert('Success');
 }
-showForm()
-document.getElementById('buy_form').addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const name = document.getElementById('name').value;
-  const row = document.getElementById('row').value;
-  const place = document.getElementById('place').value;
-
-  buyTicket(row, place, name);
-  document.getElementById('name').value = '';
-  document.getElementById('modal-form').style.display = 'none';
-});
+showForm();
+submitBuyForm();

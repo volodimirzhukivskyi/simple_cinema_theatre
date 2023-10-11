@@ -15,11 +15,13 @@ html {
   height: 80%;
   background-color: black;
   display: flex;
+  position: relative;
 }
 
 .root > .top_bar .screen {
   width: 70%;
   padding-top: 10px;
+  position: relative;
 }
 
 .root > .top_bar .log {
@@ -32,25 +34,36 @@ html {
 #screen_illustr {
   width: 80%;
   padding: 0px 10px;
-  background-color: #BEBEBE;
+  background-color: #bebebe;
   color: white;
   text-align: center;
   margin: 0 auto;
-  border-radius:  80% 80% 0 0;
+  border-radius: 80% 80% 0 0;
   margin-bottom: 40px;
 }
 
 .root > .bottom_bar {
   height: 20%;
   background-color: black;
+  display: flex;
+  flex-direction: column;
 }
-.wrapper{
-    color: white;
+.buyBtn {
+  position: absolute;
+  top: 40px;
+  right: 20px;
 }
-#buy_form{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+.wrapper {
+  color: white;
+}
+#buy_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+tr>td:last-child{
+  text-align: center;
 }
 .root .bottom_bar .wrapper {
   display: flex;
@@ -74,8 +87,6 @@ html {
   font-weight: normal;
   border: 1px solid gray;
 }
-
-
 
 .row_elem {
   display: flex;
