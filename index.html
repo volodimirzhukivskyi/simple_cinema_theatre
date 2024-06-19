@@ -1,57 +1,59 @@
 <html>
-  <head>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap"
-      rel="stylesheet" />
-    <script src="./js/cinema.js" type="module"></script>
-    <script src="./js/functions/deleteTransaction.js" type="module"></script>
-  </head>
 
-  <body>
-    <header class="header"></header>
-    <div class="root">
-      <div class="top_bar">
-        <div class="screen">
-          <div id="screen_illustr">Screen</div>
+<head>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <script src="./js/cinema.js" type="module"></script>
+  <script src="./js/functions/deleteTransaction.js" type="module"></script>
+</head>
 
-          <div id="screen_layout"></div>
-          <button disabled id="buyBtn" class="buyBtn">Buy ticket</button>
-        </div>
-        <div class="log">
-          <table>
-            <thead>
-              <tr>
-                <th>Row</th>
-                <th>Seat</th>
-                <th>Name</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+<body>
+  <header class="header"></header>
+  <div class="root">
+    <div class="top_bar">
+      <div class="screen">
+        <div id="screen_illustr">Screen</div>
 
-        </div>
+        <div id="screen_layout"></div>
+        <button disabled id="buyBtn" class="buyBtn">Buy ticket</button>
       </div>
+      <div class="log">
+        <table>
+          <thead>
+            <tr>
+              <th>Row</th>
+              <th>Seat</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
 
-      <div class="bottom_bar" >
-        <div class="wrapper">
-          <div>Number of seats: <span id="number_of_seats"></span></div>
-          <div>Total sum: <span id="total_sum"></span></div>
-          <div>Return sum: <span id="return_sum"></span></div>
-        </div>
-
-        <div id="modal-form" style="display: none">
-          <form action="" id="buy_form" class="buy_form">
-            <input type="text" id="name" placeholder="Type name" required />
-            <input type="email" id="email" placeholder="Type email" required />
-            <input type="hidden" id="place" />
-            <input type="hidden" id="row" />
-            <button type="submit">Buy ticket</button>
-          </form>
-        </div>
       </div>
     </div>
-  </body>
+    <h2>test</h2>
+    <div class="bottom_bar">
+      <div class="wrapper">
+        <div>Number of seats: <span id="number_of_seats"></span></div>
+        <div>Total sum: <span id="total_sum"></span></div>
+        <div>Return sum: <span id="return_sum"></span></div>
+      </div>
+
+      <div id="modal-form" style="display: none">
+        <form action="" id="buy_form" class="buy_form">
+          <input type="text" id="name" placeholder="Type name" required />
+          <input type="email" id="email" placeholder="Type email" required />
+          <input type="hidden" id="place" />
+          <input type="hidden" id="row" />
+          <button type="submit">Buy ticket</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
